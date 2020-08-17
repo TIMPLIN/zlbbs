@@ -1,0 +1,44 @@
+{% extends 'cms/cms_base.html' %}
+{% from 'common/_macros.html' import static %}
+
+{% block title %}添加员工{% endblock %}
+
+{% block head %}
+    <script src="{{ static('cms/js/add_cuser.js') }}"></script>
+{% endblock %}
+
+{% block page_title %}
+    {{ self.title() }}
+{% endblock %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="box">
+                <div class="box-body">
+                    <div class="form-container">
+                        <div class="form-group">
+                            <div class="input-group">
+                                {% if user %}
+                                    <input type="email" class="form-control" name="email" value="{{ user.email }}">
+                                {% else %}
+                                    <input type="email" class="form-control" name="email" placeholder="邮箱">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkbox">
+                        {% for role in roles %}
+                            <label style="margin-right: 20px;">
+                                <input type="checkbox" name="roles" value="{{ role.id }}">{{ role.name }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button class="btn btn-primary pull-right" id="add-cuser">立即添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
